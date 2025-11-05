@@ -104,7 +104,7 @@
   let intervalId;
   let running = false;
   let lapCounter = 0;
-  let lapTimes = []; // store lap times in ms
+  let lapTimes = [];
 
   const display = document.getElementById('display');
   const startPauseBtn = document.getElementById('startPauseBtn');
@@ -123,7 +123,7 @@
     const formattedSeconds = seconds.toString().padStart(2, '0');
     const formattedMilliseconds = milliseconds.toString().padStart(3, '0');
 
-    return ${formattedHours}:${formattedMinutes}:${formattedSeconds}.${formattedMilliseconds};
+    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}.${formattedMilliseconds}`;
   }
 
   function updateTime() {
@@ -162,19 +162,18 @@
   function recordLap() {
     if (!running) return;
     lapCounter++;
-    lapTimes.push(elapsedTime); // store lap time in ms
+    lapTimes.push(elapsedTime);
     const lapTime = formatTime(elapsedTime);
 
     const lapElement = document.createElement('div');
     lapElement.classList.add('lap');
-    lapElement.innerHTML = <span class="lap-number">Lap ${lapCounter}</span><span>${lapTime}</span>;
+    lapElement.innerHTML = `<span class="lap-number">Lap ${lapCounter}</span><span>${lapTime}</span>`;
     lapsContainer.prepend(lapElement);
   }
 
-  // Keyboard shortcuts
   document.addEventListener('keydown', (e) => {
     if (e.code === 'Space') {
-      e.preventDefault(); // avoid scrolling
+      e.preventDefault();
       startPauseBtn.click();
     } else if (e.key.toLowerCase() === 'l') {
       lapBtn.click();
@@ -183,7 +182,6 @@
     }
   });
 
-  // Button events
   startPauseBtn.addEventListener('click', () => {
     if (!running) {
       startTimer();
@@ -197,3 +195,4 @@
 </script>
 </body>
 </html>
+
